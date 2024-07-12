@@ -1,0 +1,60 @@
+body {
+    background-color: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .card {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+  }
+  
+  .card-body {
+    padding: 40px;
+  }
+  
+  .card-footer {
+    margin-top: 10px;
+    background-color: #f0f2f5;
+    border-radius: 0 0 20px 20px;
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    border: none;
+    transition: background 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #6e3295, #d21717, #e5a039);
+  }
+  
+  h2 {
+    font-weight: 700;
+  }
+  
+  
+  small {
+    color: #6c757d;
+  }
+  
+  a {
+    color: #fd1d1d;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #d21717;
+  }
+  
