@@ -32,5 +32,6 @@ app.use(userRoutes)
 sequelize.sync()
 .then((result) => {
     app.listen(6200);
+    console.log("Server running...")
 })
 .catch(err => console.log(err))
