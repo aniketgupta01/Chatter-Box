@@ -21,7 +21,13 @@ async function loginFormSubmit(e){
         loginForm.reset();
         if(result.status == 200){
             showMessage('Logged in successfully!','success')
-            localStorage.setItem('token',result.data.token)
+            .then(() => {
+                localStorage.setItem('token',result.data.token)
+                window.location.href = "../home/index.html"
+
+            })
+            
+            
         }
         
 
@@ -29,7 +35,7 @@ async function loginFormSubmit(e){
     }
     catch(err){
         if(err.response.status == 400){
-            showMessage('Wrong Password','error')
+            showMessage('Wrong Password!','error')
         }
         else{
             showMessage('User does not exist!','error')
@@ -50,15 +56,20 @@ async function loginFormSubmit(e){
 
 
 function showMessage(message, messageType) {
-    const messageDiv = document.createElement('div');
-    messageDiv.textContent = message;
+    return new Promise((resolve, reject) => {
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = message;
+    
+        messageDiv.className = `message ${messageType}`;
+    
+        messageContainer.innerHTML = ''; 
+        messageContainer.appendChild(messageDiv);
+    
+        setTimeout(function() {
+            messageDiv.remove(); 
+            resolve();
+        }, 500);
 
-    messageDiv.className = `message ${messageType}`;
-
-    messageContainer.innerHTML = ''; 
-    messageContainer.appendChild(messageDiv);
-
-    setTimeout(function() {
-        messageDiv.remove(); 
-    }, 4000);
+    })
+   
 }

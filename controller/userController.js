@@ -3,8 +3,18 @@ const User = require('../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-function generateToken(id, name){
-    return jwt.sign({userId:id, name:name},'secretkey')
+ async function generateToken(id, name){
+    try{
+        const userId = id.toString();
+        const hash = await bcrypt.hash(userId,10);
+        const token = jwt.sign({userId:hash, name:name},'secretkey');
+        return token;
+    }
+    catch(err){
+        console.log(err);
+        return null;
+    }
+    
 }
 
 exports.addUser = async (req,res,next) => {
@@ -54,12 +64,13 @@ exports.loginUser = async(req,res,next) => {
             res.status(404).json({message:"User not found"})
         }
         else{
-            bcrypt.compare(password, user.password, (err,result) => {
+            bcrypt.compare(password, user.password,async (err,result) => {
                 if(err){
                     throw new Error("Something went wrong.")
                 }
                 if(result === true){
-                    const token = generateToken(user.id,user.name);
+                    const token = await generateToken(user.id,user.name);
+                    console.log(token)
                     return res.status(200).json({message:"success", token:token})
 
                 }
